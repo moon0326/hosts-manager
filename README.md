@@ -5,7 +5,7 @@ This Node.js CLI tool allows you to manage the `/private/etc/hosts` file on macO
 
 ## Features
 
-- **extend**: extend host entries from one or more files to `/private/etc/hosts`.
+- **Extend**: extend host entries from one or more files to `/private/etc/hosts`.
 - **Remove**: Remove host entries that were previously extended.
 - **Temporary extending**: Use the `--temp` option to temporarily extend host entries. These entries will be automatically removed when you manually quit the command.
 - **Flush DNS Cache**: Automatically flush the macOS DNS cache after making changes to the hosts file.
@@ -34,7 +34,7 @@ This Node.js CLI tool allows you to manage the `/private/etc/hosts` file on macO
 
 ### Commands
 
-#### extend Host Entries
+#### Extend Host Entries
 
 To extend host entries from a file:
 
@@ -42,9 +42,14 @@ To extend host entries from a file:
 sudo hosts-manager extend /path/to/hosts/file1
 ```
 
-This will extend the entries from `file1` to the `/private/etc/hosts` file and flush the macOS DNS cache.
+This will extend the entries from `file1` to the `/private/etc/hosts` file and flush the macOS DNS cache. You can also pass multiple files. 
 
-#### extend with Temporary Entries (`--temp`)
+
+```bash
+sudo hosts-manager extend /path/to/hosts/file1 /path/to/hosts/file2
+```
+
+#### Extend with Temporary Entries (`--temp`)
 
 To extend entries temporarily, use the `--temp` option. The entries will be automatically removed when you quit the command (using `Ctrl + C`).
 
@@ -73,12 +78,12 @@ sudo hosts-manager remove /path/to/hosts/file1 --flush-chrome
 
 ### Example Usage
 
-- **extend host entries with temporary mode**:
+- **Extend host entries with temporary mode**:
   ```bash
   sudo hosts-manager extend /path/to/hosts/file1 --temp
   ```
 
-- **extend host entries and flush Chrome socket pools**:
+- **Extend host entries and flush Chrome socket pools**:
   ```bash
   sudo hosts-manager extend /path/to/hosts/file1 --flush-chrome
   ```
@@ -90,7 +95,7 @@ sudo hosts-manager remove /path/to/hosts/file1 --flush-chrome
 
 ## How It Works
 
-1. **extending**: The tool wraps the extended host entries with unique comments:
+1. **Extending**: The tool wraps the extended host entries with unique comments:
    ```
    # Start of entries from /path/to/hosts/file1
    127.0.0.1 example.com
