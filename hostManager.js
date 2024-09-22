@@ -17,7 +17,7 @@ const extendHosts = (files, isTemp = false) => {
       if (fileContent.includes(commentStart) && fileContent.includes(commentEnd)) {
         console.log(`Entries from ${filePath} already exist, skipping extend.`);
       } else {
-        fs.extendFileSync(HOSTS_FILE, wrappedContent);
+        fs.appendFileSync(HOSTS_FILE, wrappedContent);
         console.log(`extended entries from ${filePath}`);
 
         if (isTemp) {
