@@ -1,5 +1,4 @@
 
-```
 # Hosts Manager CLI
 
 This Node.js CLI tool allows you to manage the `/private/etc/hosts` file on macOS. It supports appending and removing host entries from external files, flushing the macOS DNS cache, and optionally flushing Chrome's socket pools.
@@ -112,4 +111,3 @@ Feel free to open issues or submit pull requests if you find bugs or have sugges
 ## License
 
 This project is licensed under the MIT License.
-```
