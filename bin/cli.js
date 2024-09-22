@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-const { appendHosts, removeHosts, flushDNSCache, flushChromeSockets } = require('../hostManager.js');
+const { extendHosts, removeHosts, flushDNSCache, flushChromeSockets } = require('../hostManager.js');
 
 const main = async (args) => {
   if (args.length === 0) {
-    console.log('Usage: node hosts.js [append|remove] [file1 file2 ...] [--flush-chrome] [--temp]');
+    console.log('Usage: node hosts.js [extend|remove] [file1 file2 ...] [--flush-chrome] [--temp]');
     return;
   }
 
@@ -13,8 +13,8 @@ const main = async (args) => {
   const isTemp = args.includes('--temp');
 
   switch (command) {
-    case 'append':
-      appendHosts(pathsOrEntries, isTemp);
+    case 'extend':
+      extendHosts(pathsOrEntries, isTemp);
       flushDNSCache();
       if (shouldFlushChrome) {
         await flushChromeSockets();
@@ -38,7 +38,7 @@ const main = async (args) => {
       }
       break;
     default:
-      console.log('Unknown command. Use append or remove.');
+      console.log('Unknown command. Use extend or remove.');
   }
 };
 

@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { appendHosts, removeHosts, flushDNSCache } = require('./hostsManager');
+const { extendHosts, removeHosts, flushDNSCache } = require('./hostsManager');
 
 jest.mock('fs');
 
@@ -11,29 +11,29 @@ const mockFileContent = `
 beforeEach(() => {
   // Reset mocks before each test
   fs.readFileSync.mockClear();
-  fs.appendFileSync.mockClear();
+  fs.extendFileSync.mockClear();
   fs.writeFileSync.mockClear();
 });
 
-describe('appendHosts', () => {
-  it('should append hosts when not already present', () => {
+describe('extendHosts', () => {
+  it('should extend hosts when not already present', () => {
     // Mock reading the hosts file
     fs.readFileSync.mockReturnValue(mockFileContent);
 
-    // Simulate appending new hosts
+    // Simulate extending new hosts
     const filePaths = ['/path/to/hosts/file1'];
     const fileContent = '127.0.0.1 example.com';
     fs.readFileSync.mockReturnValueOnce(fileContent); // Simulate file content
 
-    appendHosts(filePaths, false);
+    extendHosts(filePaths, false);
 
-    expect(fs.appendFileSync).toHaveBeenCalledWith(
+    expect(fs.extendFileSync).toHaveBeenCalledWith(
       '/private/etc/hosts',
       '\n# Start of entries from /path/to/hosts/file1\n127.0.0.1 example.com\n# End of entries from /path/to/hosts/file1\n'
     );
   });
 
-  it('should skip appending when entries already exist', () => {
+  it('should skip extending when entries already exist', () => {
     const existingContent = `
     # Start of entries from /path/to/hosts/file1
     127.0.0.1 example.com
@@ -44,9 +44,9 @@ describe('appendHosts', () => {
     fs.readFileSync.mockReturnValue(mockFileContent + existingContent);
 
     const filePaths = ['/path/to/hosts/file1'];
-    appendHosts(filePaths, false);
+    extendHosts(filePaths, false);
 
-    expect(fs.appendFileSync).not.toHaveBeenCalled(); // No new append should happen
+    expect(fs.extendFileSync).not.toHaveBeenCalled(); // No new extend should happen
   });
 });
 

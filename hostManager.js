@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer');
 
 const HOSTS_FILE = '/private/etc/hosts';
 
-const appendHosts = (files, isTemp = false) => {
+const extendHosts = (files, isTemp = false) => {
   let fileContent = fs.readFileSync(HOSTS_FILE, 'utf8');
 
   files.forEach((filePath) => {
@@ -15,10 +15,10 @@ const appendHosts = (files, isTemp = false) => {
       const wrappedContent = `\n${commentStart}\n${content}\n${commentEnd}\n`;
 
       if (fileContent.includes(commentStart) && fileContent.includes(commentEnd)) {
-        console.log(`Entries from ${filePath} already exist, skipping append.`);
+        console.log(`Entries from ${filePath} already exist, skipping extend.`);
       } else {
-        fs.appendFileSync(HOSTS_FILE, wrappedContent);
-        console.log(`Appended entries from ${filePath}`);
+        fs.extendFileSync(HOSTS_FILE, wrappedContent);
+        console.log(`extended entries from ${filePath}`);
 
         if (isTemp) {
           process.stdin.resume();
@@ -84,4 +84,4 @@ const flushChromeSockets = async () => {
   }
 };
 
-module.exports = { appendHosts, removeHosts, flushDNSCache, flushChromeSockets };
+module.exports = { extendHosts, removeHosts, flushDNSCache, flushChromeSockets };
