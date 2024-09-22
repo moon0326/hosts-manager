@@ -20,7 +20,7 @@ This Node.js CLI tool allows you to manage the `/private/etc/hosts` file on macO
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-repo/hosts-manager-cli.git
+   git clone https://github.com/moon0326/hosts-manager
    cd hosts-manager-cli
    ```
 
