@@ -1,0 +1,23 @@
+{
+  "name": "hosts-manager",
+  "version": "1.0.0",
+  "description": "A terminal app to manage /private/etc/hosts file, flush macOS DNS cache, and flush Chrome's socket pools.",
+  "main": "hosts.js",
+  "scripts": {
+    "start": "node hosts.js"
+  },
+  "bin": {
+    "hosts-manager": "bin/cli.js"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^19.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
